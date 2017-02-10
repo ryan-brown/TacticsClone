@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tactics</title>
+
+  <style type="text/css">
+    body {
+      margin: 100;
+      padding: 0;
+    }
+    
+    .unselectable {
+      -moz-user-select: -moz-none;
+      -khtml-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      behavior: url(ieUserSelectFix.htc);
+    }
+  </style>
+
+  <!-- <link rel="shortcut icon" href="img/favicon.ico" /> -->
+
+</head>
+
+<center>
+
+<body bgcolor="#EEEEEE" class="unselectable">
+<canvas id="canvas" width="750" height="750"></canvas>
+<br />
+<button id="nextStateButton" type="button">Next</button>
+<button id="endTurnButton" type="button">End Turn</button>
+<button id="newGameButton" type="button">New Game</button>
+
+</center>
+
+<script type="text/javascript" src="src/cell.js"></script>
+<script type="text/javascript" src="src/piece.js"></script>
+<script type="text/javascript" src="src/board.js"></script>
+<script type="text/javascript" src="src/game.js"></script>
+
+</body>
+</html>
