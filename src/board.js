@@ -18,6 +18,9 @@ var Board = function(x, y, width, height) {
 	}
 
 	this.getCellFromMouse = function(mx, my) {
+		if(mx < this.x || mx > this.x+this.width || my < this.y || my > this.y+this.height) {
+			return -1;
+		}
 		cell = new Cell(Math.floor((mx-this.x)/this.cellWidth), Math.floor((my-this.y)/this.cellHeight));
 		return (cell.toStr() in this.cells) ? cell : -1;
 	}

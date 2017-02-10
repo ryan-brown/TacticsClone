@@ -1,6 +1,6 @@
 var Game = function() {
 	// Variables
-	var canvas, ctx, board, hoveredCell, selectedCell, turn, state, cursorX, cursorY, images, imageCount;
+	var canvas, ctx, board, moved, attacked, hoveredCell, selectedCell, turn, state, cursorX, cursorY, images, imageCount;
 
 	// Functions
 	var setCursorPosition, clearCanvas, renderBoard, renderPieces, renderOverlay, render;
@@ -74,7 +74,7 @@ var Game = function() {
 
 	getAllValidMoves = function() {
 		allCells = getValidMoves(board.get(selectedCell).speed, [], [selectedCell]);
-		return allCells;//removeCellFromArray(selectedCell, allCells);
+		return removeCellFromArray(selectedCell, allCells);
 	}
 
 	validMove = function(cell) {
@@ -126,6 +126,8 @@ var Game = function() {
 			board.get(selectedCell).currentRFP = board.get(selectedCell).rfp
 		}
 		state = 0;
+		moved = false;
+		attacked = false;
 		selectedCell = 0;
 		board.nextTurn(turn);
 		turn += 1;
@@ -155,7 +157,15 @@ var Game = function() {
 						board.set(selectedCell, 0);
 						selectedCell = cell;
 					}
-					state = 2;
+
+					moved = true;
+
+					if(!attacked) {
+					    state = 2;
+					}
+					else {
+					    state = 3;
+					}
 					render();
 				}
 				break;
@@ -173,11 +183,17 @@ var Game = function() {
 						}
 					}
 
+					attacked = true;
+					
 					if(board.gameOver()) {
 						state = 4;
 						render();
 					} else {
-						state = 3;
+						if(!moved) {
+							state = 1;
+						} else {
+							state = 3;
+						}
 						render();
 					}
 				}
@@ -344,6 +360,8 @@ var Game = function() {
 	reset = function() {
 		turn = 0;
     	state = 0;
+	moved = false;
+	attacked = false;
     	hoveredCell = 0;
     	selectedCell = 0;
     	board = new Board(100, 100, 550, 550);
@@ -421,19 +439,23 @@ var Game = function() {
 		imageCount = imgs.length;
     	loadImages(imgs);
 	    
-		document.getElementById("endTurnButton").addEventListener('click', function() {
+	    document.getElementById("endTurnButton").addEventListener('click', function() {
 	    	nextTurn();
 	    	render();
 	    });
 
-	    document.getElementById("nextStateButton").addEventListener('click', function() {
-	        if(state > 0 && state < 3) {
-	        	state += 1;
-	        	render();
-	        } else if(state == 3) {
-	        	nextTurn();
-	        	render();
-	        } 
+	    document.getElementById("moveButton").addEventListener('click', function() {
+	        if(!moved && state == 2){
+                    state = 1;
+		    render();
+		}
+	    });
+
+            document.getElementById("attackButton").addEventListener('click', function() {
+	        if(!attacked && state == 1){
+                    state = 2;
+		    render();
+		}
 	    });
 
 	    document.getElementById("newGameButton").addEventListener('click', function() {
