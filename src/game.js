@@ -12,7 +12,7 @@ var Game = function() {
 	}
 
 	hoverUpdate = function() {
-		cell = board.getCellFromMouse(cursorX, cursorY);
+		var cell = board.getCellFromMouse(cursorX, cursorY);
 		if(cell == -1) {
 			if(hoveredCell != 0) {
 				hoveredCell = 0;
@@ -34,7 +34,7 @@ var Game = function() {
 	}
 
 	removeCellFromArray = function(cell, arr) {
-		newArr = [];
+		var newArr = [];
 		for(i = 0; i < arr.length; i++) {
 			if(!cell.equals(arr[i])) newArr.push(arr[i])
 		}
@@ -74,7 +74,7 @@ var Game = function() {
 
 	getAllValidMoves = function() {
 		allCells = getValidMoves(board.get(selectedCell).speed, [], [selectedCell]);
-		return removeCellFromArray(selectedCell, allCells);
+		return allCells;//removeCellFromArray(selectedCell, allCells);
 	}
 
 	validMove = function(cell) {
@@ -122,7 +122,7 @@ var Game = function() {
 	}
 
 	nextTurn = function() {
-		if(selectedCell != 0) {
+		if(selectedCell != 0 && (moved || attacked)) {
 			board.get(selectedCell).currentRFP = board.get(selectedCell).rfp
 		}
 		state = 0;
@@ -224,7 +224,9 @@ var Game = function() {
 			cell = Cell.fromStr(cellStr);
 			coords = board.getCellCoords(cell);
 
-			ctx.drawImage(images["tile"], coords.x, coords.y);
+			//ctx.drawImage(images["tile"], coords.x, coords.y);
+			ctx.fillStyle = "#AAAAAA";
+			ctx.fillRect(coords.x+1, coords.y+1, 48, 48);
 		}
 	}
 
@@ -360,8 +362,8 @@ var Game = function() {
 	reset = function() {
 		turn = 0;
     	state = 0;
-	moved = false;
-	attacked = false;
+		moved = false;
+		attacked = false;
     	hoveredCell = 0;
     	selectedCell = 0;
     	board = new Board(100, 100, 550, 550);
@@ -446,16 +448,16 @@ var Game = function() {
 
 	    document.getElementById("moveButton").addEventListener('click', function() {
 	        if(!moved && state == 2){
-                    state = 1;
-		    render();
-		}
+            	state = 1;
+		    	render();
+			}
 	    });
 
-            document.getElementById("attackButton").addEventListener('click', function() {
+		document.getElementById("attackButton").addEventListener('click', function() {
 	        if(!attacked && state == 1){
-                    state = 2;
-		    render();
-		}
+            	state = 2;
+		   		render();
+			}
 	    });
 
 	    document.getElementById("newGameButton").addEventListener('click', function() {
