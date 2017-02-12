@@ -12,13 +12,13 @@ var Piece = function(maxHP, dodge, res, speed, rfp, orient, player, image) {
 	this.color = (this.player%2 == 0) ? "#FFDD88" : "#88DDFF"
 
 	this.render = function(ctx, coord, width, height) {
-		ctx.beginPath();
-		ctx.arc(coord.x+25, coord.y+25, 20, 0, 2 * Math.PI, false);
-		ctx.fillStyle = this.color;
-		ctx.fill();
-		ctx.lineWidth = 2;
-      	ctx.strokeStyle = '#000000';
-      	ctx.stroke();
+		// ctx.beginPath();
+		// ctx.arc(coord.x+25, coord.y+25, 20, 0, 2 * Math.PI, false);
+		// ctx.fillStyle = this.color;
+		// ctx.fill();
+		// ctx.lineWidth = 2;
+  //     	ctx.strokeStyle = '#000000';
+  //     	ctx.stroke();
 
 		ctx.save();
 		ctx.translate(coord.x+25, coord.y+25); 

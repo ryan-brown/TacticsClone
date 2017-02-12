@@ -224,9 +224,9 @@ var Game = function() {
 			cell = Cell.fromStr(cellStr);
 			coords = board.getCellCoords(cell);
 
-			//ctx.drawImage(images["tile"], coords.x, coords.y);
-			ctx.fillStyle = "#AAAAAA";
-			ctx.fillRect(coords.x+1, coords.y+1, 48, 48);
+			ctx.drawImage(images["tile"], coords.x, coords.y);
+			// ctx.fillStyle = "#AAAAAA";
+			// ctx.fillRect(coords.x+1, coords.y+1, 48, 48);
 		}
 	}
 
@@ -385,19 +385,19 @@ var Game = function() {
 
     	//
 
-    	board.set(new Cell(3,3), new Knight(1, images["knight"]));
-    	board.set(new Cell(4,3), new Knight(1, images["knight"]));
-    	board.set(new Cell(5,3), new Knight(1, images["knight"]));
-    	board.set(new Cell(6,3), new Knight(1, images["knight"]));
-    	board.set(new Cell(7,3), new Knight(1, images["knight"]));
+    	board.set(new Cell(3,3), new Knight(1, images["knight2"]));
+    	board.set(new Cell(4,3), new Knight(1, images["knight2"]));
+    	board.set(new Cell(5,3), new Knight(1, images["knight2"]));
+    	board.set(new Cell(6,3), new Knight(1, images["knight2"]));
+    	board.set(new Cell(7,3), new Knight(1, images["knight2"]));
 
-		board.set(new Cell(3,1), new Ranger(1, images["ranger"]));
-		board.set(new Cell(7,1), new Ranger(1, images["ranger"]));
+		board.set(new Cell(3,1), new Ranger(1, images["ranger2"]));
+		board.set(new Cell(7,1), new Ranger(1, images["ranger2"]));
 
-		board.set(new Cell(5,0), new Cleric(1, images["cleric"]));
+		board.set(new Cell(5,0), new Cleric(1, images["cleric2"]));
 
-    	board.set(new Cell(2,2), new Mage(1, images["mage"]));
-    	board.set(new Cell(8,2), new Mage(1, images["mage"]));
+    	board.set(new Cell(2,2), new Mage(1, images["mage2"]));
+    	board.set(new Cell(8,2), new Mage(1, images["mage2"]));
 	}
 
 	startGame = function() {
@@ -437,7 +437,7 @@ var Game = function() {
     	ctx = canvas.getContext("2d");
 
     	images = {};
-		imgs = ["knight", "mage", "ranger", "cleric", "tile"];
+		imgs = ["knight", "mage", "ranger", "cleric", "knight2", "mage2", "ranger2", "cleric2", "tile"];
 		imageCount = imgs.length;
     	loadImages(imgs);
 	    
